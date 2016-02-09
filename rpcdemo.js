@@ -3,15 +3,11 @@ var http = require("http"),
 
 // start server
 http.createServer(function (request, response) {
-    
-    if(request.method == "POST"){
-        // if POST request, handle RPC
-        new RPCHandler(request, response, RPCMethods, true);
-    }else{
-        // if GET request response with greeting
-        response.end("Hello world!");
-    }
-    
+
+    new RPCHandler(JSON.parse(
+        "{id: 'json', method: 'hello', params: {sunny:'beach'}}"
+    ), response, RPCMethods, true);
+
 }).listen(8000);
 console.log("running")
 
